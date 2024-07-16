@@ -1,0 +1,6 @@
+db/mysql/data
+api/tmp
+.DS_Store
+.go-version
+db/.DS_Store
+db/mysql/.DS_Store
