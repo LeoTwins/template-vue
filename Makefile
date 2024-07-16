@@ -16,7 +16,7 @@ exec-front:
 	docker-compose exec front /bin/bash
 
 exec-api:
-	docker-compose exec api /bin/bash
+	docker-compose exec training-api /bin/bash
 
 # mysql -uroot -p >> use dev >> show tables; OR describe user;
 exec-db:
