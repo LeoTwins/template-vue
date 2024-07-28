@@ -1,11 +1,18 @@
 # traning-template
+
 研修テンプレート
 
 ## 使用言語・フレームワーク
-front, apiの`README.md`参照
+
+front, api の`README.md`参照
 
 ## Tips
-- vscodeでファイルを開くときには、「Cmd + P > 開きたいファイル名」のショートカットだと生産性が高いのでおすすめ
+
+- vscode でファイルを開くときには、「Cmd + P > 開きたいファイル名」のショートカットだと生産性が高いのでおすすめ
+
+## DB
+
+-[テーブル設計](db/docs/dbdoc/README.md)
 
 ## 全体
 
@@ -22,9 +29,10 @@ efe6144c2864   traning-template_front   "docker-entrypoint.s…"   24 minutes ag
 ```
 
 ## front
+
 ### 開発手順
 
-1. build   
+1. build
 
 ```sh
 $ docker-compose exec front /bin/bash
@@ -33,14 +41,16 @@ $ yarn run dev --host
 ```
 
 2. 確認  
-ブラウザで以下を確認し、動作していることを確認します  
-http://localhost:5173/  
+   ブラウザで以下を確認し、動作していることを確認します  
+   http://localhost:5173/
 
 3. 開発を始める  
-さあ、スタートです！
+   さあ、スタートです！
 
 ## api
+
 ### 開発手順
+
 1. migration, テストデータ投入
 
 ```mermaid
@@ -60,12 +70,12 @@ $ sql-migrate up
 $ go run migrations/sample_users_seed.go
 ```
 
-2. echoが動作しているか確認  
-`docker ps`でapiコンテナが動作していることを確認したり、`Docker Desktop`でlogを確認する、  
-curlで確認などして、動作していることを確認します  
+2. echo が動作しているか確認  
+   `docker ps`で api コンテナが動作していることを確認したり、`Docker Desktop`で log を確認する、  
+   curl で確認などして、動作していることを確認します
 
-(例) curlで確認した時のレスポンス  
-※ apiは未実装なので、以下のレスポンスとなっています  
+(例) curl で確認した時のレスポンス  
+※ api は未実装なので、以下のレスポンスとなっています
 
 ```
 ohbay@SRC-NPC-MAC-054 traning-template % curl http://localhost:8080/ | jq
@@ -78,17 +88,21 @@ ohbay@SRC-NPC-MAC-054 traning-template % curl http://localhost:8080/ | jq
 ```
 
 3. 開発を始める  
-さあ、スタートです！
+   さあ、スタートです！
 
 ## mysql
+
 ### 開発手順
-注意::migration、および、テストデータの投入を先に行わないとテーブルがない状態になります 
+
+注意::migration、および、テストデータの投入を先に行わないとテーブルがない状態になります
 
 > [!TIP]
-> ### パスワードの見つけ方（ヒント） 
-> このリポジトリは、Dockerを使用してSQLサーバーのコンテナを構築しています
-> 
-> では、Dockerの、どのファイルで、どんなSQLサーバーのコンテナを構築するか設定しているか確認してみましょう
+>
+> ### パスワードの見つけ方（ヒント）
+>
+> このリポジトリは、Docker を使用して SQL サーバーのコンテナを構築しています
+>
+> では、Docker の、どのファイルで、どんな SQL サーバーのコンテナを構築するか設定しているか確認してみましょう
 
 ```sh
 $ docker-compose exec db /bin/bash
@@ -105,19 +119,21 @@ mysql> select * from users; // migration、および、seedの投入を実施し
 ```
 
 ## [prism](https://qiita.com/andynuma/items/bf043b5184d3826d0f92)
+
 ### 開発手順
-swagger.ymlをmockサーバーとして活用できるようになるものです。  
-初期状態として、`users`というAPIの記載例を示していて、swagger.ymlを編集すると、その修正が反映されます  
-  
-APIレスポンスを確認したい場合は、任意のRESTクライアントツール（Postmanなど）や、ブラウザ、curlなどで確認が可能  
-  
-(例) : http://localhost:4010/users をブラウザで確認した時のレスポンス  
+
+swagger.yml を mock サーバーとして活用できるようになるものです。  
+初期状態として、`users`という API の記載例を示していて、swagger.yml を編集すると、その修正が反映されます
+
+API レスポンスを確認したい場合は、任意の REST クライアントツール（Postman など）や、ブラウザ、curl などで確認が可能
+
+(例) : http://localhost:4010/users をブラウザで確認した時のレスポンス
 
 ```
 [{"id":"248c8027-b752-db4c-76c1-fb22a05e9591","name":"田中太郎","address":"東京都中央区新富1-16-4","birthday":"1990-01-01","age":33,"sex":"MALE","memberType":"GENERAL"},{"id":"a980e372-1eb2-0e1a-f23b-9208e226e954","name":"山田花子","address":"埼玉県さいたま市大宮区桜木町1-7-5","birthday":"1988-10-15","age":34,"sex":"FEMALE","memberType":"SENIOR"},{"id":"a9bbaab7-f596-712f-b4cf-c72a4323dff2","name":"山本次郎","address":"神奈川県横浜市中区横浜公園","birthday":null,"age":null,"sex":"MALE","memberType":null}]
 ```
 
-(例) : http://localhost:4010/users をcurlで確認した時のレスポンス  
+(例) : http://localhost:4010/users を curl で確認した時のレスポンス
 
 ```
 ohbay@SRC-NPC-MAC-054 traning-template % curl http://localhost:4010/users | jq
