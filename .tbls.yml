@@ -1,0 +1,18 @@
+# tbls > viewpoint
+# https://github.com/k1LoW/tbls?tab=readme-ov-file#viewpoints
+# |
+# ViewPointの設定の仕方
+# https://zenn.dev/micin/articles/2023-12-05-majimaccho-tbls#viewpoints%E3%81%AE%E8%A8%AD%E5%AE%9A%E3%81%AE%E4%BB%95%E6%96%B9
+viewpoints:
+  - 
+    name: サンプル
+    desc: >
+      外部応札システム（クラウド）システムを
+      実現するためのテーブル構成を示す
+    tables:
+      - test
+      - categories
+      - todos
+
+dsn: mysql://root:password@localhost:3400/dev?charset=utf8mb4&parseTime=True&loc=Local
+docPath: db/docs/dbdoc
