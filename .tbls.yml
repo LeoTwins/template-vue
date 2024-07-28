@@ -11,15 +11,8 @@ viewpoints:
       実現するためのテーブル構成を示す
     tables:
       - test
-    groups:
-      -
-        name: Sample
-        desc:  > 
-          サンプルサンプルサンプル
-          サンプルサンプルサンプル
-          サンプルサンプルサンプル
-        tables:
-          - test
+      - categories
+      - todos
 
 dsn: mysql://root:password@localhost:3400/dev?charset=utf8mb4&parseTime=True&loc=Local
 docPath: db/docs/dbdoc

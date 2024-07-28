@@ -21,3 +21,6 @@ exec-api:
 # mysql -uroot -p >> use dev >> show tables; OR describe user;
 exec-db:
 	docker-compose exec db /bin/bash 
+
+tbls:
+	tbls doc --rm-dist
