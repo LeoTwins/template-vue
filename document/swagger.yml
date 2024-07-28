@@ -1,85 +1,20 @@
 openapi: 3.0.3
 info:
-  title: strongest-api-2023
+  title: training-202407
+  description: |
+    A案件を経験し、Vue, Golangの様々な知見を得たのでOUTPUTするため、TODOアプリを開発し、運用する<br/>
+    openapiを介してバックエンド、フロントエンド間のコミュニケーションをスムーズにしたいため、openapi-typescriptを使用してフロント側の<br/>
+    パス、リクエスト、レスポンスの方を自動生成する<br/>
+    自動生成の元ネタなので積極的にopenapiをメンテナンスしてください
+    フロント用に自動生成しやすい書き方は[こちら](https://openapi-ts.pages.dev/advanced#styleguide)
+
   version: 1.0.0
 tags:
-  - name: user
-    description: ユーザー情報
   - name: category
     description: カテゴリ情報
   - name: todo
     description: Todo情報
 paths:
-  /users:
-    get:
-      tags:
-        - user
-      summary: ユーザー一覧API
-      description: |
-        ユーザーをデフォルトで全件取得して返却します <br>
-        idの昇順。
-      responses:
-        200:
-          $ref: '#/components/responses/GetUsers'
-        500:
-          $ref: '#/components/responses/InternalServerError'
-    post:
-      tags:
-        - user
-      summary: ユーザー登録API
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  nullable: false
-                nickname:
-                  type: string
-                  nullable: false
-                address:
-                  type: string
-                  nullable: false
-                age:
-                  type: integer
-                  nullable: false
-                birthday:
-                  type: string
-                  format: date
-                  nullable: false
-                trigger:
-                  type: array
-                  example: []
-                question:
-                  type: string
-                  nullable: false
-              required:
-                - name
-                - question
-                - trigger
-      responses:
-        200:
-          $ref: '#/components/responses/GetUser'
-  /users/{userId}:
-    get:
-      tags:
-        - user
-      summary: ユーザー詳細API
-      description: |
-        ユーザー詳細を取得して返却します <br>
-      parameters:
-        - $ref: '#/components/parameters/UserId'
-      responses:
-        200:
-          $ref: '#/components/responses/GetUser'
-        400:
-          $ref: '#/components/responses/IllegalInput'
-        404:
-          $ref: '#/components/responses/NotFound'
-        500:
-          $ref: '#/components/responses/InternalServerError'
   /categories:
     get:
       tags:
@@ -153,6 +88,144 @@ paths:
       parameters:
         - in: path
           name: categoryId
+          schema:
+            type: integer
+          required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: Not Found
+        '5XX':
+          description: Unexpected error.
+  /todo:
+    get:
+      tags:
+        - todo
+      summary: TODO取得API
+      description: |
+        TODO一覧を取得して返却します<br/>
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+        - in: query
+          name: limit
+          schema:
+            type: integer
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum:
+              - DONE
+              - TODO
+      responses:
+        200:
+          $ref: '#/components/responses/GetTodoList'
+        '401':
+          description: Authorization information is missing or invalid.
+        '5XX':
+          description: Unexpected error.
+    post:
+      tags:
+        - todo
+      summary: TODO登録API
+      description: |
+        TODOを登録します<br/>
+        デフォルトで、`done(タスク状態)`をfalseにします
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                categoryId:
+                  type: integer
+                dueDate:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Authorization information is missing or invalid.
+        '5XX':
+          description: Unexpected error.
+  /todo/{todoId}:
+    get:
+      tags:
+        - todo
+      summary: TODO詳細API
+      description: |
+        TODOを１つ取得します
+      parameters:
+        - in: path
+          name: todoId
+          schema:
+            type: integer
+          required: true
+      responses:
+        200:
+          $ref: '#/components/responses/GetTodo'
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: Not Found
+        '5XX':
+          description: Unexpected error.
+    put:
+      tags:
+        - todo
+      summary: TODO更新API
+      description: |
+        TODOの情報を更新します<br/>
+        更新できる情報として以下があります<br/>
+        - カテゴリ
+        - TODOの名称
+        - 期限
+      parameters:
+        - in: path
+          name: todoId
+          schema:
+            type: integer
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                categoryId:
+                  type: integer
+                dueDate:
+                  type: string
+                  format: date
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Authorization information is missing or invalid.
+        '404':
+          description: Not Found
+        '5XX':
+          description: Unexpected error.
+    delete:
+      tags:
+        - todo
+      summary: TODO論理削除API
+      description: |
+        TODOを論理削除（doneの値を切り替える）します
+      parameters:
+        - in: path
+          name: todoId
           schema:
             type: integer
           required: true
@@ -319,6 +392,20 @@ components:
         phoneNumber: null
         email: taro@example.com
   responses:
+    GetTodoList:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/Todo'
+    GetTodo:
+      description: successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Todo'
     GetCategories:
       description: successful operation
       content:
