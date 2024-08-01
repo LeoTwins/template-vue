@@ -6,6 +6,7 @@ defineProps<{
 
 <template>
   <div class="greetings"></div>
+  <div class="greetings">Hello!</div>
 </template>
 
 <style scoped>
