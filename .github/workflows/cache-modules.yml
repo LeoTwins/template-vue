@@ -1,0 +1,23 @@
+name: Install Module And Cache
+
+# 他ブランチから参照するためデフォルトブランチでcacheする
+# mainブランチに対するプルリクがクローズされたタイミングで実行
+# 参考
+# https://qiita.com/otoko__/items/93f7039f4748b048beca
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  cache:
+    if: github.event.pull_request.merged == true
+    name: Cache NodeModules
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node
+        name: setup & cache module
