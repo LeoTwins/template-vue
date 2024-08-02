@@ -5,7 +5,7 @@ defineProps<{
   msg: string;
 }>();
 
-const aaa = ref(0);
+const aaaa = ref(0);
 </script>
 
 <template>
