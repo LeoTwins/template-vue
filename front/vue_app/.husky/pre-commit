@@ -1,0 +1,1 @@
+cd front/vue_app && npm run lint-staged

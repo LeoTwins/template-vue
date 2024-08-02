@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import { ref } from "vue";
+
 defineProps<{
   msg: string;
 }>();
+
+const aaaa = ref(0);
 </script>
 
 <template>
   <div class="greetings"></div>
+  <div class="greetings">Hello!</div>
 </template>
 
 <style scoped>

@@ -24,3 +24,6 @@ exec-db:
 
 tbls:
 	tbls doc --rm-dist
+
+openapi-typescript:
+	cd front/vue_app &&  npx openapi-typescript /Users/ohbay/Documents/1_Study/traning-system/training-0717/document/swagger.yml -o ./schema/index.d.ts
