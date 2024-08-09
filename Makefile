@@ -25,5 +25,14 @@ exec-db:
 tbls:
 	tbls doc --rm-dist
 
+#
+# swaggerのスキーマを元にして、typescriptのスキーマを生成する
+#
 openapi-typescript:
 	cd front/vue_app &&  npx openapi-typescript /Users/ohbay/Documents/1_Study/traning-system/training-0717/document/swagger.yml -o ./schema/index.d.ts
+
+#
+# swaggerを元にして、openapi.jsonを生成する（msw X storybookで使用するため）ww
+#
+redocly:
+	cd front/vue_app &&  npx redocly bundle /Users/ohbay/Documents/1_Study/traning-system/training-0717/document/swagger.yml --output ./__tests__/openapi.json

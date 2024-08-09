@@ -1,0 +1,663 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "training-202407",
+    "description": "A案件を経験し、Vue, Golangの様々な知見を得たのでOUTPUTするため、TODOアプリを開発し、運用する<br/>\nopenapiを介してバックエンド、フロントエンド間のコミュニケーションをスムーズにしたいため、openapi-typescriptを使用してフロント側の<br/>\nパス、リクエスト、レスポンスの方を自動生成する<br/>\n自動生成の元ネタなので積極的にopenapiをメンテナンスしてください\nフロント用に自動生成しやすい書き方は[こちら](https://openapi-ts.pages.dev/advanced#styleguide)\n",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "category",
+      "description": "カテゴリ情報"
+    },
+    {
+      "name": "todo",
+      "description": "Todo情報"
+    }
+  ],
+  "paths": {
+    "/categories": {
+      "get": {
+        "tags": [
+          "category"
+        ],
+        "summary": "カテゴリ一覧API",
+        "description": "カテゴリをデフォルトで全件取得して返却します <br>\nidの昇順。\n",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetCategories"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "category"
+        ],
+        "summary": "カテゴリ登録API",
+        "description": "カテゴリを登録します!\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/categories/{categoryId}": {
+      "put": {
+        "tags": [
+          "category"
+        ],
+        "summary": "カテゴリ更新API",
+        "description": "カテゴリを更新します\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "category"
+        ],
+        "summary": "カテゴリ削除API",
+        "description": "カテゴリを削除します\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "categoryId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/todo": {
+      "get": {
+        "tags": [
+          "todo"
+        ],
+        "summary": "TODO取得API",
+        "description": "TODO一覧を取得して返却します<br/>\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DONE",
+                "TODO"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetTodoList"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "todo"
+        ],
+        "summary": "TODO登録API",
+        "description": "TODOを登録します<br/>\nデフォルトで、`done(タスク状態)`をfalseにします\n",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "categoryId": {
+                    "type": "integer"
+                  },
+                  "dueDate": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    },
+    "/todo/{todoId}": {
+      "get": {
+        "tags": [
+          "todo"
+        ],
+        "summary": "TODO詳細API",
+        "description": "TODOを１つ取得します\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todoId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetTodo"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "todo"
+        ],
+        "summary": "TODO更新API",
+        "description": "TODOの情報を更新します<br/>\n更新できる情報として以下があります<br/>\n- カテゴリ\n- TODOの名称\n- 期限\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todoId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "categoryId": {
+                    "type": "integer"
+                  },
+                  "dueDate": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "todo"
+        ],
+        "summary": "TODO論理削除API",
+        "description": "TODOを論理削除（doneの値を切り替える）します\n",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "todoId",
+            "schema": {
+              "type": "integer"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Authorization information is missing or invalid."
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "5XX": {
+            "description": "Unexpected error."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Todo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 255,
+            "nullable": false
+          },
+          "category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": false,
+            "example": "1990-01-01"
+          },
+          "done": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserBase": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string",
+            "format": "date",
+            "example": "1909-01-01",
+            "nullable": true
+          },
+          "age": {
+            "type": "integer",
+            "nullable": true
+          },
+          "sex": {
+            "type": "string",
+            "enum": [
+              "MALE",
+              "FEMALE"
+            ]
+          },
+          "memberType": {
+            "$ref": "#/components/schemas/MemberType"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "address",
+          "birthday",
+          "age",
+          "sex",
+          "memberType"
+        ]
+      },
+      "User": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/UserBase"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "phoneNumber": {
+                "type": "string",
+                "example": "09012345678"
+              },
+              "email": {
+                "type": "string",
+                "example": "sample@example.com",
+                "nullable": true
+              }
+            },
+            "required": [
+              "phoneNumber",
+              "email"
+            ]
+          }
+        ]
+      },
+      "MemberType": {
+        "type": "string",
+        "nullable": true,
+        "enum": [
+          "GENERAL",
+          "SPECIAL",
+          "CHILD",
+          "SENIOR"
+        ]
+      },
+      "Trigger": {
+        "type": "string",
+        "enum": [
+          "HP",
+          "INTRODUCTION",
+          "TVCM",
+          "HOTPEPPER",
+          "FLYER",
+          "NONE"
+        ]
+      },
+      "GeneralError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "format": "int",
+            "example": "エラーカテゴリ/エラータイプ"
+          }
+        }
+      }
+    },
+    "parameters": {
+      "UserId": {
+        "name": "userId",
+        "in": "path",
+        "description": "ユーザーID",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "248c8027-b752-db4c-76c1-fb22a05e9591",
+          "nullable": false
+        }
+      }
+    },
+    "examples": {
+      "GetUsersCommon": {
+        "value": [
+          {
+            "id": "248c8027-b752-db4c-76c1-fb22a05e9591",
+            "name": "田中太郎",
+            "address": "東京都中央区新富1-16-4",
+            "birthday": "1990-01-01",
+            "age": 33,
+            "sex": "MALE",
+            "memberType": "GENERAL"
+          },
+          {
+            "id": "a980e372-1eb2-0e1a-f23b-9208e226e954",
+            "name": "山田花子",
+            "address": "埼玉県さいたま市大宮区桜木町1-7-5",
+            "birthday": "1988-10-15",
+            "age": 34,
+            "sex": "FEMALE",
+            "memberType": "SENIOR"
+          },
+          {
+            "id": "a9bbaab7-f596-712f-b4cf-c72a4323dff2",
+            "name": "山本次郎",
+            "address": "神奈川県横浜市中区横浜公園",
+            "birthday": null,
+            "age": null,
+            "sex": "MALE",
+            "memberType": null
+          }
+        ]
+      },
+      "GetUserCommon": {
+        "value": {
+          "id": "248c8027-b752-db4c-76c1-fb22a05e9591",
+          "name": "田中太郎",
+          "address": "東京都中央区新富1-16-4",
+          "birthday": "1990-01-01",
+          "age": 33,
+          "sex": "MALE",
+          "phoneNumber": "09012345678",
+          "email": "taro@example.com"
+        }
+      },
+      "GetUserIncludeNullFields": {
+        "value": {
+          "id": "a9bbaab7-f596-712f-b4cf-c72a4323dff2",
+          "name": "山本次郎",
+          "address": "神奈川県横浜市中区横浜公園",
+          "birthday": null,
+          "age": null,
+          "sex": "MALE",
+          "phoneNumber": null,
+          "email": "taro@example.com"
+        }
+      }
+    },
+    "responses": {
+      "GetTodoList": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Todo"
+              }
+            }
+          }
+        }
+      },
+      "GetTodo": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Todo"
+            }
+          }
+        }
+      },
+      "GetCategories": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Category"
+              }
+            }
+          }
+        }
+      },
+      "GetUsers": {
+        "description": "successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/UserBase"
+              }
+            },
+            "examples": {
+              "GetUsersCommon": {
+                "$ref": "#/components/examples/GetUsersCommon"
+              }
+            }
+          }
+        }
+      },
+      "GetUser": {
+        "description": "Successful operation",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/User"
+            },
+            "examples": {
+              "GetUserCommon": {
+                "$ref": "#/components/examples/GetUserCommon"
+              },
+              "GetUserIncludeNullFields": {
+                "$ref": "#/components/examples/GetUserIncludeNullFields"
+              }
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GeneralError"
+            }
+          }
+        }
+      },
+      "IllegalInput": {
+        "description": "Illegal input for operation.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GeneralError"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GeneralError"
+            }
+          }
+        }
+      }
+    }
+  }
+}
