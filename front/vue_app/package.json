@@ -13,7 +13,8 @@
     "prepare": "cd .. && husky front/vue_app/.husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "msw-auto-mock": "npx msw-auto-mock __tests__/openapi.json -o ./__tests__ "
+    "msw-auto-mock": "npx msw-auto-mock __tests__/openapi.json -o ./__tests__ ",
+    "mkdir": "mkdir api && mkdir components && mkdir hooks && mkdir types && touch index.ts"
   },
   "lint-staged": {
     "*.{ts,vue}": "npm run format"
