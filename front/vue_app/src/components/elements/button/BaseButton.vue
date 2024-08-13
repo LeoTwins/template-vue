@@ -1,17 +1,8 @@
-<template>
-  <button type="button" :class="classes" @click="$emit('click')" :style="style">{{ label }}</button>
-</template>
-
 <script lang="ts" setup>
-import "./button.css";
 import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
-    /**
-     * The label of the button
-     */
-    label: string;
     /**
      * primary or secondary button
      */
@@ -28,8 +19,8 @@ const props = withDefaults(
   { primary: false }
 );
 
-defineEmits<{
-  click: [];
+const emit = defineEmits<{
+  (e: "click", id: number): void;
 }>();
 
 const classes = computed(() => ({
@@ -42,4 +33,14 @@ const classes = computed(() => ({
 const style = computed(() => ({
   backgroundColor: props.backgroundColor
 }));
+
+const onClick = () => {
+  emit("click", 1);
+};
 </script>
+
+<template>
+  <button type="button" :class="classes" @click="onClick" :style="style">
+    <slot></slot>
+  </button>
+</template>
