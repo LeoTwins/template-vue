@@ -1,24 +1,31 @@
-import { paths } from "@/schema";
 import { client } from "@/shared/api/client";
 import { ApiResponse } from "@/shared/api/response";
 import createClient from "openapi-fetch";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
-export type Category = ApiResponse<"GetCategories">;
+// TODO : type.tsに移設
+export type Category = ApiResponse<"GetCategories">[number];
 
-const convertData = (res: ApiResponse<"GetCategories">): Category => {
-  return res.map(v => {
-    id: v.id,
-    name: v.name
-  })
+// TODO : function.tsに移設
+const convertData = (res: ApiResponse<"GetCategories">[number]): Category => {
+  return {
+    id: res.id,
+    name: res.name
+  };
 };
 
 export const useInteract = () => {
+  const categories = ref<Category[]>();
+
   onMounted(async () => {
     const { data, error } = await client.GET("/categories");
     if (error) {
       console.debug(error);
+    } else {
+      categories.value = data.map(convertData);
     }
   });
-  return {};
+  return {
+    categories
+  };
 };

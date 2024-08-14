@@ -1,4 +1,5 @@
-import { components } from "@/schema";
+import { components } from ".";
+
 /**
  * openapiから定義されているpath, responseなどの型を抽出する仕掛け
  * v1.schemaはpnpm gen:schemaで生成する

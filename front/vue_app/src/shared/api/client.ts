@@ -1,5 +1,5 @@
 import createClient, { type Middleware } from "openapi-fetch";
-import type { paths } from "@/schema";
+import { paths } from ".";
 
 /**
  * @see {@link https://openapi-ts.pages.dev/openapi-fetch}
