@@ -1,10 +1,10 @@
 import createClient, { type Middleware } from "openapi-fetch";
-import { paths } from ".";
+import * as v1Schema from "./v1.schema";
 
 /**
  * @see {@link https://openapi-ts.pages.dev/openapi-fetch}
  */
-const baseUrl: string = import.meta.env.API_BASE_URL ?? "";
+const baseUrl: string = "http://localhost:5173/";
 
 // const authMiddleware: Middleware = {
 //   onRequest: async (req) => {
@@ -17,7 +17,7 @@ const baseUrl: string = import.meta.env.API_BASE_URL ?? "";
 //   }
 // };
 
-const instance = createClient<paths>({ baseUrl });
+const instance = createClient<v1Schema.paths>({ baseUrl });
 // instance.use(authMiddleware);
 
 export const client = {

@@ -1,13 +1,13 @@
 import { client } from "@/shared/api/client";
-import { ApiResponse } from "@/shared/api/response";
+import * as response from "@/shared/api/response";
 import createClient from "openapi-fetch";
 import { onMounted, ref } from "vue";
 
 // TODO : type.tsに移設
-export type Category = ApiResponse<"GetCategories">[number];
+export type Category = response.ApiResponse<"GetCategories">[number];
 
 // TODO : function.tsに移設
-const convertData = (res: ApiResponse<"GetCategories">[number]): Category => {
+const convertData = (res: response.ApiResponse<"GetCategories">[number]): Category => {
   return {
     id: res.id,
     name: res.name

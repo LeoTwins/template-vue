@@ -2,7 +2,7 @@
 import BatsuButton from "@/components/elements/button/BatsuButton.vue";
 
 defineProps<{
-  label: string;
+  label: string | undefined;
 }>();
 </script>
 
