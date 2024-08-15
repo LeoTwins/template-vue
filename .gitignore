@@ -29,3 +29,4 @@ coverage
 *.sw?
 
 *storybook.log
+.vite
