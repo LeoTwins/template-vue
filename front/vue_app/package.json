@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
+    "test:ts": "tsc --noEmit",
     "test:unit": "vitest --environment jsdom --root src/",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
@@ -13,13 +14,15 @@
     "prepare": "cd .. && husky front/vue_app/.husky",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "msw-auto-mock": "npx msw-auto-mock __tests__/openapi.json -o ./__tests__ "
+    "msw-auto-mock": "npx msw-auto-mock __tests__/openapi.json -o ./__tests__ ",
+    "mkdir": "mkdir api && mkdir components && mkdir hooks && mkdir types && touch index.ts"
   },
   "lint-staged": {
     "*.{ts,vue}": "npm run format"
   },
   "dependencies": {
     "axios": "^1.2.2",
+    "openapi-fetch": "^0.11.1",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
@@ -61,8 +64,13 @@
     "storybook": "^8.2.7",
     "tailwindcss": "^3.2.4",
     "typescript": "^5.5.4",
-    "vite": "^5.0.11",
+    "vite": "^5.0.0",
     "vitest": "^1.2.2",
     "vue-tsc": "^1.8.27"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }

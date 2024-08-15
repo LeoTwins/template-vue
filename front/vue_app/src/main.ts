@@ -9,4 +9,17 @@ const app = createApp(App);
 
 app.use(router);
 
-app.mount("#app");
+const enableMocking = async () => {
+  if (import.meta.env.PROD) {
+    return
+  }
+
+  const { worker } = await import("./mocks/browser")
+
+  return worker.start({ onUnhandledRequest: "bypass" })
+}
+
+enableMocking().then(() => {
+  app.mount("#app")
+})
+
