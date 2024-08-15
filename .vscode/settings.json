@@ -1,5 +1,7 @@
 {
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "cSpell.words": ["Batsu", "openapi"]
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "files.autoSave": "onFocusChange",
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 4
 }
