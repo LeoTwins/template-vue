@@ -15,7 +15,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "msw-auto-mock": "npx msw-auto-mock __tests__/openapi.json -o ./__tests__ ",
-    "mkdir": "mkdir api && mkdir components && mkdir hooks && mkdir types && touch index.ts"
+    "generate:redocly": "npx redocly bundle document/swagger.yml --output ./src/mocks/openapi.json",
+    "generate:openapi": "npx openapi-typescript document/swagger.yml -o ./src/shared/api/v1.schema.ts"
   },
   "lint-staged": {
     "*.{ts,vue}": "npm run format"
