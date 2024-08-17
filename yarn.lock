@@ -5083,7 +5083,7 @@ is-negative-zero@^2.0.3:
   resolved "https://registry.npmjs.org/is-negative-zero/-/is-negative-zero-2.0.3.tgz"
   integrity sha512-5KoIu2Ngpyek75jXodFvnafB6DJgr3u8uuK0LEZJjrU19DrMD3EVERaR8sjz8CCGgpZvxPl9SuE1GMVPFHx1mw==
 
-is-node-process@^1.2.0:
+is-node-process@^1.0.1, is-node-process@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/is-node-process/-/is-node-process-1.2.0.tgz"
   integrity sha512-Vg4o6/fqPxIjtxgUH5QLJhwZ7gW5diGCVlXpuUfELC62CuxM1iHcRe51f2W1FDy04Ai4KJkagKjx3XaqyfRKXw==
@@ -5840,7 +5840,14 @@ msw-auto-mock@^0.25.0:
     swagger2openapi "7.0.8"
     ts-pattern "5.2.0"
 
-msw@^2.3.5, msw@>=2:
+msw-storybook-addon@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/msw-storybook-addon/-/msw-storybook-addon-2.0.3.tgz"
+  integrity sha512-CzHmGO32JeOPnyUnRWnB0PFTXCY1HKfHiEB/6fYoUYiFm2NYosLjzs9aBd3XJUryYEN0avJqMNh7nCRDxE5JjQ==
+  dependencies:
+    is-node-process "^1.0.1"
+
+msw@^2.0.0, msw@^2.3.5, msw@>=2:
   version "2.3.5"
   resolved "https://registry.npmjs.org/msw/-/msw-2.3.5.tgz"
   integrity sha512-+GUI4gX5YC5Bv33epBrD+BGdmDvBg2XGruiWnI3GbIbRmMMBeZ5gs3mJ51OWSGHgJKztZ8AtZeYMMNMVrje2/Q==

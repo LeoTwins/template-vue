@@ -22,6 +22,7 @@ export const useInteract = () => {
     if (error) {
       console.debug(error);
     } else {
+      console.log(data)
       categories.value = data.map(convertData);
     }
   });
