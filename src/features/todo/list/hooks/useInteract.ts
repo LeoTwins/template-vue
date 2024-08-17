@@ -4,9 +4,9 @@ import { onMounted, ref } from "vue"
 
 export type TodoPresenter = response.ApiResponse<"GetTodo"> & {
   categoryLabel: string | undefined
-  categoryClassName: string | undefined
   expiredDucDateClassName: string | undefined
   doneClassName: string | undefined
+  doneCheckClassName: string | undefined
 };
 
 const convertPresenter = (res: response.ApiResponse<"GetTodo">): TodoPresenter => {
@@ -14,11 +14,11 @@ const convertPresenter = (res: response.ApiResponse<"GetTodo">): TodoPresenter =
     id: res.id,
     name: res.name,
     category: res.category,
-    dueDate: res.dueDate, // TODO format yyyy/MM/dd ()
+    dueDate: res.dueDate,
     done: res.done,
     doneClassName: res.done ? "line-through decoration-gray-500" : "",
+    doneCheckClassName : res.done ? "text-gray-400 dark:text-gray-500" : "text-blue-700 dark:text-blue-500",
     categoryLabel: res.category?.name,
-    categoryClassName: "",// TODO convert DICT
     expiredDucDateClassName:  Date.now() > new Date(res.dueDate!).getTime() ?  "text-red-500": "",
   }
 }
