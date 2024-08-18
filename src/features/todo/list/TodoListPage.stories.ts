@@ -15,6 +15,20 @@ const meta: Meta<typeof TodoListPage> = {
   parameters: {
     msw: {
       handlers: [
+        http.get('http://localhost:5173/categories', async () => {
+          return HttpResponse.json(
+            [
+              {
+                id: "1",
+                name: "fishing"
+              },
+              {
+                id: "2",
+                name: "study"
+              }
+            ]
+          );
+        }),
         http.get('http://localhost:5173/todo', async () => {
           return HttpResponse.json(
             [

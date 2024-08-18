@@ -2151,6 +2151,15 @@
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.0.tgz"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
+"@vee-validate/zod@^4.13.2":
+  version "4.13.2"
+  resolved "https://registry.npmjs.org/@vee-validate/zod/-/zod-4.13.2.tgz"
+  integrity sha512-y1aqelutD6btX2ayZk3w8udClAykptphlGLwu0vlCqY2r9mrJqMn1EKqtcwXAvEom+ceTcHJOwGr2FUA7i+ZEg==
+  dependencies:
+    type-fest "^4.8.3"
+    vee-validate "4.13.2"
+    zod "^3.22.4"
+
 "@vitejs/plugin-vue-jsx@^3.0.0":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-3.0.0.tgz"
@@ -2380,10 +2389,10 @@
     de-indent "^1.0.2"
     he "^1.2.0"
 
-"@vue/devtools-api@^6.4.5":
-  version "6.4.5"
-  resolved "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.4.5.tgz"
-  integrity sha512-JD5fcdIuFxU4fQyXUu3w2KpAJHzTVdN+p4iOX2lMWSHMOoQdMAcpFLZzm9Z/2nmsoZ1a96QEhZ26e50xLBsgOQ==
+"@vue/devtools-api@^6.4.5", "@vue/devtools-api@^6.6.1":
+  version "6.6.3"
+  resolved "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.6.3.tgz"
+  integrity sha512-0MiMsFma/HqA6g3KLKn+AGpL1kgKhFWszC9U29NfpWK5LE7bjeXxySWJrOJ77hBz+TBrBQ7o4QJqbPbqbs8rJw==
 
 "@vue/eslint-config-prettier@^7.0.0":
   version "7.0.0"
@@ -8149,6 +8158,11 @@ type-fest@^4.7.1:
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-4.23.0.tgz"
   integrity sha512-ZiBujro2ohr5+Z/hZWHESLz3g08BBdrdLMieYFULJO+tWc437sn8kQsWLJoZErY8alNhxre9K4p3GURAG11n+w==
 
+type-fest@^4.8.3:
+  version "4.25.0"
+  resolved "https://registry.npmjs.org/type-fest/-/type-fest-4.25.0.tgz"
+  integrity sha512-bRkIGlXsnGBRBQRAY56UXBm//9qH4bmJfFvq83gSz41N282df+fjy8ofcEgc1sM8geNt5cl6mC2g9Fht1cs8Aw==
+
 type-fest@^4.9.0:
   version "4.24.0"
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-4.24.0.tgz"
@@ -8397,6 +8411,14 @@ vary@~1.1.2:
   resolved "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
+vee-validate@^4.13.2, vee-validate@4.13.2:
+  version "4.13.2"
+  resolved "https://registry.npmjs.org/vee-validate/-/vee-validate-4.13.2.tgz"
+  integrity sha512-HlpR/6MJ92TW9f135umMZKUqdd/tFQTxLNSf2ImbU4Y/MlLVAUpF1l64VdjTOhbClAqPjCb5p/SqHDxLpUHXrw==
+  dependencies:
+    "@vue/devtools-api" "^6.6.1"
+    type-fest "^4.8.3"
+
 vite-node@1.6.0:
   version "1.6.0"
   resolved "https://registry.npmjs.org/vite-node/-/vite-node-1.6.0.tgz"
@@ -8571,7 +8593,7 @@ vue-tsc@^1.8.27:
     "@vue/language-core" "1.8.27"
     semver "^7.5.4"
 
-"vue@^2.6.14 || ^3.2.0", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.0.1, vue@^3.2.0, vue@^3.2.25, vue@^3.2.45, vue@^3.3.4, vue@>=2, "vue@>=3.2.26 < 4", vue@3.4.37:
+"vue@^2.6.14 || ^3.2.0", vue@^3.0.0, "vue@^3.0.0-0 || ^2.6.0", vue@^3.0.1, vue@^3.2.0, vue@^3.2.25, vue@^3.2.45, vue@^3.3.4, vue@^3.4.26, vue@>=2, "vue@>=3.2.26 < 4", vue@3.4.37:
   version "3.4.37"
   resolved "https://registry.npmjs.org/vue/-/vue-3.4.37.tgz"
   integrity sha512-3vXvNfkKTBsSJ7JP+LyR7GBuwQuckbWvuwAid3xbqK9ppsKt/DUvfqgZ48fgOLEfpy1IacL5f8QhUVl77RaI7A==

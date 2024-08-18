@@ -1,34 +1,41 @@
 <script lang="ts" setup>
 import { useInteract } from "./hooks/useInteract";
+import { useCategoryInteract} from "@/hooks/category/useInteract"
+import TodoList from "./components/TodoList.vue"
 
 const { todos } = useInteract()
+const { categories } = useCategoryInteract()
+
 </script>
 <template>
   <h2 class="mb-2 text-3xl font-semibold text-gray-900 dark:text-white">Todo</h2>
-  <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-    <template v-for="item in todos" :key="item.id">
-      <li class="py-3 sm:py-4" :class="item.doneClassName">
-        <div class="flex items-center">
-          <svg class="flex-shrink-0 w-4 h-4" :class="item.doneCheckClassName" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-          </svg>
-          <div class="mx-2"/>
-          <div class="flex-1 min-w-0 ms-4">
-            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-              {{ item.name }}
-            </p>
-            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-              {{ item.categoryLabel }}
-            </p>
-          </div>
-          <div class="flex items-center text-base font-semibold text-gray-900 dark:text-white"
-            :class="item.expiredDucDateClassName">
-            {{ item.dueDate }}
-          </div>
-        </div>
-      </li>
-    </template>
-  </ul>
+  <div class="grid grid-cols-4">
+    <div class="p-2.5">
+      <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">カテゴリ</label>
+      <select id="countries"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        >
+        <option v-for="item in categories" :value="item.id">{{item.name}}</option>
+      </select>
+    </div>
+    <div class="p-2.5">
+      <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">タスク</label>
+      <input type="text" id="last_name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="Doe" required />
+    </div>
+    <div class="p-2.5">
+      <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">期限</label>
+      <input type="date" id="company"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        required />
+    </div>
+    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+  </div>
+  <div class="my-6">
+    <hr />
+  </div>
+
+  <TodoList :items="todos" />
 </template>
+@/hooks/category/useInteract

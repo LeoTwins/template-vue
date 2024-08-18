@@ -1,15 +1,10 @@
+import { onMounted, ref } from "vue"
 import { client } from "@/shared/api/client"
 import * as response from "@/shared/api/response"
-import { onMounted, ref } from "vue"
+import * as types from "../types"
 
-export type TodoPresenter = response.ApiResponse<"GetTodo"> & {
-  categoryLabel: string | undefined
-  expiredDucDateClassName: string | undefined
-  doneClassName: string | undefined
-  doneCheckClassName: string | undefined
-};
-
-const convertPresenter = (res: response.ApiResponse<"GetTodo">): TodoPresenter => {
+// TODO : move functions.ts
+const convertPresenter = (res: response.ApiResponse<"GetTodo">): types.TodoPresenter => {
   return {
     id: res.id,
     name: res.name,
@@ -22,8 +17,9 @@ const convertPresenter = (res: response.ApiResponse<"GetTodo">): TodoPresenter =
     expiredDucDateClassName:  Date.now() > new Date(res.dueDate!).getTime() ?  "text-red-500": "",
   }
 }
+
 export const useInteract = () => {
-  const todos = ref<TodoPresenter[]>()
+  const todos = ref<types.TodoPresenter[]>()
   onMounted(async () => {
     const { data, error } = await client.GET("/todo")
     if (error) {
