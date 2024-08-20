@@ -16,15 +16,18 @@
     "build-storybook": "storybook build",
     "msw-auto-mock": "npx msw-auto-mock __tests__/openapi.json -o ./__tests__ ",
     "generate:redocly": "npx redocly bundle document/swagger.yml --output ./src/mocks/openapi.json",
-    "generate:openapi": "npx openapi-typescript document/swagger.yml -o ./src/shared/api/v1.schema.ts"
+    "generate:openapi": "npx openapi-typescript document/swagger.yml -o ./src/shared/api/v1.schema.ts",
+    "generate:mock": "npx msw-auto-mock document/swagger.yml -o ./src/mocks"
   },
   "lint-staged": {
     "*.{ts,vue}": "npm run format"
   },
   "dependencies": {
+    "@vee-validate/zod": "^4.13.2",
     "axios": "^1.2.2",
     "openapi-fetch": "^0.11.1",
     "pinia": "^2.0.28",
+    "vee-validate": "^4.13.2",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
@@ -58,6 +61,7 @@
     "lint-staged": "^15.2.7",
     "msw": "^2.3.5",
     "msw-auto-mock": "^0.25.0",
+    "msw-storybook-addon": "^2.0.3",
     "npm-run-all": "^4.1.5",
     "openapi-typescript": "^7.3.0",
     "postcss": "^8.4.20",

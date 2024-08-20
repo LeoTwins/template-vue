@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
+import { http, HttpResponse } from 'msw'
+
 import { fn } from "@storybook/test";
 import IndexPage from "./IndexPage.vue";
 
@@ -9,7 +11,23 @@ const meta: Meta<typeof IndexPage> = {
   // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   argTypes: {},
-  args: {}
+  args: {},
+  parameters: {
+    msw: {
+      handlers: [
+        http.get('http://localhost:5173/categories', async () => {
+          return HttpResponse.json(
+            [
+              {
+                id: "1",
+                name: "hoge"
+              }
+            ]
+          );
+        }),
+      ]
+    }
+  }
 };
 
 export default meta;

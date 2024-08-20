@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import CategoryItem from "../components/CategoryItem.vue";
-import { useInteract } from "../hooks/useInteract";
+import { useCategoryInteract } from "@/hooks/category/useInteract";
 
-const { categories } = useInteract()
+const { categories } = useCategoryInteract()
 </script>
 <template>
   <h2 class="mb-2 text-3xl font-semibold text-gray-900 dark:text-white">カテゴリ</h2>

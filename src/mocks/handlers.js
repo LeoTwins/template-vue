@@ -24,7 +24,7 @@ export const handlers = [
   http.get(`${baseURL}/categories`, async () => {
     const resultArray = [
       [await getGetCategories200Response(), { status: 200 }],
-      // [await getGetCategories500Response(), { status: 500 }],
+      [await getGetCategories500Response(), { status: 500 }],
     ];
 
     return HttpResponse.json(...resultArray[next() % resultArray.length]);
